@@ -5,7 +5,7 @@ const db = require('./db');
 let dotenv = require("dotenv");
 dotenv.config();
 // let port = process.env.PORT || 9041;
-const port = process.env.PORT || 9091;
+const port = 9091;
 const cors = require('cors');
 app.use(cors());
 

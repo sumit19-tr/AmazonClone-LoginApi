@@ -61,7 +61,7 @@ LoginRounter.post('/login', async(req, res) => {
     try {
         const user = await AmazonUsers.findOne({ email: req.body.email });
         if (!user) {
-            return res.status(400).send({ auth: false, token: "no user found" });
+            return res.send({ auth: false, token: 'no user found' });
         }
         else {
             const passIsValid = bcrypt.compareSync(req.body.password, user.password);//decrypt password
