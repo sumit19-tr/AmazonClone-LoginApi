@@ -17,7 +17,7 @@ router.post('/add-id', async (req, res) => {
 
         if (existingCartItem) {
             // Product ID already exists in the cart
-            res.status(400).send({ success: false, msg: "Product already exists in the cart" });
+            res.status(200).send({ success: false, msg: "Product already exists in the cart" });
         } else {
             const cart_obj = new cartModel({
                 user_name: req.body.user_name,
