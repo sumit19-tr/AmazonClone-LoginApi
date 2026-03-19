@@ -73,19 +73,43 @@ router.delete('/removeItems/:id', async (req, res) => {
 });
 
 // update Quantity
-router.put('/updateQuantity',async(req,res)=>{
+router.put('/updateQuantity/:user',async(req,res)=>{
     try {
-        const productId = req.body.productId;
-        const updatedQuantity = req.body.Quantity;        
-        const product_details = await cartModel.find({ productId:productId});
-        const currentQuantity = product_details[0].Quantity;
-        const currentPrice = product_details[0].Price;
+        const user = req.params.user;
+        const productId = Number(req.body.productId);
+        const updatedQuantity = Number(req.body.Quantity);        
+        const product_details = await cartModel.findOne({ productId:productId,user_name: user});
+
+        // Check if product exists
+        if (!product_details) {
+            return res.status(404).send({
+                success: false,
+                msg: "Product not found"
+            });
+        }
+
+        const currentQuantity = Number(product_details.Quantity);
+        const currentPrice = Number(product_details.Price);
+
+        if(currentQuantity === 0){
+            return res.status(400).send({
+                success:false,
+                msg:"Current quantity cannot be 0"
+            })
+        }
+
+         if(!productId || isNaN(updatedQuantity)){
+            return res.status(400).send({
+                success:false,
+                msg:"Invalid productId or Quantity"
+            });
+        }
 
         // calculate the new prize based on the updated quantity
         const updatedPrice = (currentPrice/currentQuantity)*updatedQuantity;
         // console.log("Price",Price);
-        const updateQuantity = await cart.updateOne(
-            {productId:productId},
+        await cartModel.updateOne(
+            {productId:productId,user_name: user},
             {
                 $set:{
                     "Quantity":updatedQuantity,

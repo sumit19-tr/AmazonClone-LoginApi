@@ -1,11 +1,11 @@
 -> items in cart
     (GET)http://localhost:9091/api/auth/cart-items
-        https://amazonclone-loginapi-production.up.railway.app/api/auth/cart-items/Sumit%20mehra
+        https://amazonclone-loginapi.onrender.com/api/auth/cart-items/Sumit%20mehra
 
 
 -> Add item to cart (Post api)
    http://localhost:9091/api/auth/add-id
-   https://amazonclone-loginapi-production.up.railway.app/api/auth/add-id
+   https://amazonclone-loginapi.onrender.com/api/auth/add-id
     example=>
     body=>
     {
@@ -22,7 +22,7 @@
     }
 -> remove items (delete request);
     http://localhost:9091/api/auth/removeItems/1
-    https://amazonclone-loginapi-production.up.railway.app/api/auth/removeItems/12
+    https://amazonclone-loginapi.onrender.com/api/auth/removeItems/12
 
     {
     "success": true,
